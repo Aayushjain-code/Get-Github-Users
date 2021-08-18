@@ -4,10 +4,8 @@ import styled from 'styled-components';
 
 
 
+
 const Followers = () => {
-
-
-
   return <h2>followers component</h2>;
 };
 
