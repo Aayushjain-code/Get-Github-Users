@@ -10,7 +10,7 @@ const Dashboard = () => {
     <main>
       <Navbar />
       <Search />
-      <Info></Info>
+      <Info />
       <User />
       <Repos />
     </main>
