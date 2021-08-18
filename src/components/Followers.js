@@ -2,9 +2,18 @@ import React from 'react';
 import { GithubContext } from '../context/context';
 import styled from 'styled-components';
 
+
+
 const Followers = () => {
+
+
+
   return <h2>followers component</h2>;
 };
+
+
+
+
 
 const Wrapper = styled.article`
   background: var(--clr-white);
