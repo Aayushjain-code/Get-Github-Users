@@ -8,7 +8,7 @@ import { GithubContext } from '../context/context';
 
 const Search = () => {
   const [user, setUser] = React.useState('');
-  const { requests } = React.useContext(GithubContext);
+  const { requests, error } = React.useContext(GithubContext);
 
 
   //get thinghd from global context
@@ -24,6 +24,9 @@ const Search = () => {
   return (
     <section className="section">
       <Wrapper className="section-center">
+        {error.show && <ErrorWrapper>
+          <p>{error.msg}</p>
+        </ErrorWrapper>}
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <MdSearch />
@@ -113,6 +116,8 @@ const Wrapper = styled.div`
     font-weight: 400;
   }
 `;
+
+
 const ErrorWrapper = styled.article`
   position: absolute;
   width: 90vw;
