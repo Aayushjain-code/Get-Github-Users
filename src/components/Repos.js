@@ -39,25 +39,43 @@ const Repos = () => {
       return { ...item, value: item.stars }
     }).slice(0, 5);
 
+  //Stars and forks
+  let { stars, forks } = repos.reduce((total, item) => {
+    const { stargazers_count, name, forks } = item;
+    total.stars[stargazers_count] = { label: name, value: stargazers_count }
+
+    total.forks[forks] = { label: name, value: forks }
+
+    return total;
+  }, {
+    stars: {},
+    forks: {}
+  }
+  );
+
+  stars = Object.values(stars).slice(-5).reverse();
+  forks = Object.values(forks).slice(-5).reverse();
 
 
 
+  console.log(stars);
 
-  const chartData = [
-    {
-      label: "html",
-      value: "200"
-    },
-    {
-      label: "css",
-      value: "260"
-    },
-    {
-      label: "javascript",
-      value: "180"
-    },
 
-  ];
+  // const chartData = [
+  //   {
+  //     label: "html",
+  //     value: "200"
+  //   },
+  //   {
+  //     label: "css",
+  //     value: "260"
+  //   },
+  //   {
+  //     label: "javascript",
+  //     value: "180"
+  //   },
+
+  // ];
 
 
   return (
@@ -65,9 +83,9 @@ const Repos = () => {
       <Wrapper className='section-center'>
         {/* <ExampleChart data={chartData} /> */}
         <Pie3D data={mostused} />
-        <Column3D data={chartData} />
+        <Column3D data={stars} />
         <Doughnut2D data={mostPopular} />
-        <Bar3D data={chartData} />
+        <Bar3D data={forks} />
       </Wrapper>
     </section>
   );
