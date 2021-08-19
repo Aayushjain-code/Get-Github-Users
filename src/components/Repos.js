@@ -20,7 +20,7 @@ const Repos = () => {
         stars: total[language].stars + stargazers_count
       }
     }
-    console.log(language);
+    // console.log(language);
     return total;
   }, {});
 
@@ -58,7 +58,7 @@ const Repos = () => {
 
 
 
-  console.log(stars);
+  // console.log(stars);
 
 
   // const chartData = [
