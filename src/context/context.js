@@ -19,7 +19,7 @@ const GithubProvider = ({ children }) => {
 
 	//Request Loading
 	const [requests, setRequests] = useState(0);
-	const [loading, setLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	//errors
 	const [error, setError] = useState({ show: false, msg: "" });
@@ -27,7 +27,7 @@ const GithubProvider = ({ children }) => {
 
 	const searchGithubUser = async (user) => {
 		toggleError();
-		// setLoading(true)
+		setIsLoading(true);
 		const response = await (axios(`${rootUrl}/users/${user}`)).
 			catch(err => console.log(err))
 		console.log(response);
@@ -38,6 +38,8 @@ const GithubProvider = ({ children }) => {
 		} else {
 			toggleError(true, 'there is no user with that username');
 		}
+		checkRequest();
+		setIsLoading(false);
 	}
 
 
@@ -71,7 +73,7 @@ const GithubProvider = ({ children }) => {
 
 
 
-	return <GithubContext.Provider value={{ githubUser, repos, followers, requests, error, searchGithubUser }}>
+	return <GithubContext.Provider value={{ githubUser, repos, followers, requests, error, searchGithubUser, isLoading, }}>
 		{children}
 	</GithubContext.Provider>
 }
