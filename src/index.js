@@ -17,13 +17,12 @@ ReactDOM.render(
       domain="dev-f1g5bjqm.us.auth0.com"
       clientId="UqwY6dcfV5NkqYZsJy0oyt4X18z34iVy"
       redirectUri={window.location.origin}
+      cacheLocation="localstorage"
     >
       <GithubProvider>
         <App />
       </GithubProvider>
     </Auth0Provider>
-
-
   </React.StrictMode>,
   document.getElementById('root')
 );
