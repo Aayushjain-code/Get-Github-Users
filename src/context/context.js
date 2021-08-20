@@ -30,22 +30,35 @@ const GithubProvider = ({ children }) => {
 		setIsLoading(true);
 		const response = await (axios(`${rootUrl}/users/${user}`)).
 			catch(err => console.log(err))
-		console.log(response);
+		// console.log(response);
 
 		if (response) {
 			setGithubUser(response.data);
 			const { login, followers_url } = response.data;
 
-			//repos
-			await axios(`${rootUrl}/users/${login}/repos?per_page=100`).
-				then(response =>
-					setRepos(response.data)
-				);
+			// //repos
+			// await .
+			// 	then(response =>
+			// 		setRepos(response.data)
+			// 	);
 
-			//followers
-			await axios(`${followers_url}?per_page=100`).
-				then(response =>
-					setFollowers(response.data));
+			// //followers
+			// await .
+			// 	then(response =>
+			// 		setFollowers(response.data));
+
+			await Promise.allSettled([axios(`${rootUrl}/users/${login}/repos?per_page=100`), axios(`${followers_url}?per_page=100`)])
+				.then((results) => {
+					console.log(results);
+					const [repos, followers] = results;
+					const status = 'fullfilled';
+					if (repos.status === status) {
+						setRepos(repos.value.data)
+					}
+					if (repos.status === status) {
+						setFollowers(followers.value.data)
+					}
+				}).catch(err => console.log(err))
 			//more logic here
 			//Repos
 			//https://api.github.com/users/john-smilga/repos?per_page=100
